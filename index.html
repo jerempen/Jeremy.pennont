@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeremy Pennont — Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#12161c;
+  --surface:#181d25;
+  --surface-alt:#1f2530;
+  --border:#2a323f;
+  --border-bright:#3a4454;
+  --text:#eef1f5;
+  --text-dim:#98a2b3;
+  --text-faint:#5c6779;
+  --accent:#ffb454;
+  --accent-dim:#a97a3d;
+  --accent-2:#5eead4;
+  --radar-line:rgba(255,180,84,0.28);
+  --radar-line-soft:rgba(255,180,84,0.12);
+  --max:1080px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter', sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:64px 64px;
+  opacity:0.12;
+  pointer-events:none;
+  z-index:0;
+}
+.mono{font-family:'IBM Plex Mono', monospace;}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+a{color:inherit; text-decoration:none;}
+h1,h2,h3{font-family:'IBM Plex Mono', monospace; letter-spacing:-0.01em;}
+
+/* ---------- NAV ---------- */
+nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(18,22,28,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:16px; padding-bottom:16px;}
+.nav-id{font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:0.06em; color:var(--text-dim);}
+.nav-id b{color:var(--accent); font-weight:600;}
+.nav-links{display:flex; gap:28px; font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:0.03em;}
+.nav-links a{color:var(--text-dim); transition:color .2s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-cta{
+  border:1px solid var(--border-bright); padding:8px 16px; border-radius:2px;
+  font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--text);
+  transition:border-color .2s, color .2s;
+}
+.nav-cta:hover{border-color:var(--accent); color:var(--accent);}
+@media (max-width:720px){ .nav-links{display:none;} }
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;
+  padding:96px 0 80px;
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.hero-grid{
+  max-width:680px;
+}
+
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em;
+  color:var(--accent); text-transform:uppercase; margin-bottom:22px;
+}
+.eyebrow::before{content:""; width:7px; height:7px; background:var(--accent); border-radius:50%; box-shadow:0 0 8px var(--accent);}
+.hero h1{
+  font-size:clamp(38px, 6vw, 60px);
+  font-weight:700; line-height:1.02; margin-bottom:14px;
+  text-transform:uppercase;
+}
+.hero .role{
+  font-family:'IBM Plex Mono', monospace; color:var(--accent-2); font-size:clamp(15px,2vw,18px);
+  margin-bottom:22px; letter-spacing:0.02em;
+}
+.hero p.lede{color:var(--text-dim); font-size:16px; max-width:52ch; margin-bottom:32px;}
+.hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+.btn{
+  font-family:'IBM Plex Mono', monospace; font-size:13px; padding:13px 22px;
+  border-radius:2px; letter-spacing:0.02em; display:inline-flex; align-items:center; gap:8px;
+  transition:all .2s;
+}
+.btn-primary{background:var(--accent); color:#161006; font-weight:600;}
+.btn-primary:hover{background:#ffc478;}
+.btn-ghost{border:1px solid var(--border-bright); color:var(--text);}
+.btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+
+/* ---------- SECTION SHELL ---------- */
+section{padding:76px 0; border-bottom:1px solid var(--border);}
+.sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:40px;}
+.sec-num{font-family:'IBM Plex Mono', monospace; color:var(--accent); font-size:13px;}
+.sec-head h2{font-size:22px; text-transform:uppercase; letter-spacing:0.04em;}
+.sec-line{flex:1; height:1px; background:var(--border);}
+
+/* ---------- EXPERIENCE ---------- */
+.exp-row{
+  display:grid; grid-template-columns:150px 1fr; gap:24px;
+  padding:22px 0; border-top:1px solid var(--border);
+}
+.exp-row:last-child{border-bottom:none;}
+.exp-date{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--text-faint); padding-top:2px;}
+.exp-role{font-weight:600; font-size:16px; margin-bottom:2px;}
+.exp-org{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--accent-2); margin-bottom:10px;}
+.exp-desc{color:var(--text-dim); font-size:14.5px; max-width:60ch;}
+@media (max-width:640px){ .exp-row{grid-template-columns:1fr; gap:6px;} }
+
+/* ---------- PROJECTS ---------- */
+.projects{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+@media (max-width:820px){ .projects{grid-template-columns:1fr;} }
+.card{
+  background:var(--surface); border:1px solid var(--border); border-radius:4px;
+  padding:30px; display:flex; flex-direction:column; gap:16px;
+  transition:border-color .2s, transform .2s;
+}
+.card:hover{border-color:var(--border-bright); transform:translateY(-3px);}
+.card-top{display:flex; align-items:center; justify-content:space-between;}
+.card-icon{font-size:26px;}
+.card-status{font-family:'IBM Plex Mono', monospace; font-size:10px; color:var(--accent-2); border:1px solid var(--border-bright); padding:4px 8px; border-radius:2px; letter-spacing:0.06em;}
+.card h3{font-size:18px; text-transform:none; line-height:1.3;}
+.card .ctx-label{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;}
+.card p{color:var(--text-dim); font-size:14.5px;}
+.tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;}
+.tag{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--accent); border:1px solid var(--accent-dim); padding:4px 9px; border-radius:2px;}
+.card-link{
+  margin-top:auto; padding-top:14px; border-top:1px solid var(--border);
+  font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--text-dim);
+  display:flex; align-items:center; gap:8px; transition:color .2s;
+}
+.card-link:hover{color:var(--accent);}
+
+/* ---------- SKILLS ---------- */
+.skill-groups{display:grid; grid-template-columns:repeat(3,1fr); gap:32px;}
+@media (max-width:720px){ .skill-groups{grid-template-columns:1fr 1fr;} }
+@media (max-width:480px){ .skill-groups{grid-template-columns:1fr;} }
+.skill-group h4{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:14px;}
+.skill-list{display:flex; flex-direction:column; gap:9px;}
+.skill-item{font-size:14.5px; color:var(--text); display:flex; align-items:center; gap:9px;}
+.skill-item::before{content:""; width:4px; height:4px; background:var(--accent); flex-shrink:0;}
+
+/* ---------- CONTACT / FOOTER ---------- */
+footer{padding:70px 0 40px;}
+.contact-inner{
+  display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px;
+  padding-bottom:40px; border-bottom:1px solid var(--border); margin-bottom:26px;
+}
+footer h2{font-size:clamp(26px,4vw,38px); text-transform:uppercase; max-width:14ch; line-height:1.1;}
+.contact-list{display:flex; flex-direction:column; gap:12px; font-family:'IBM Plex Mono', monospace; font-size:14px;}
+.contact-list a{color:var(--text-dim); transition:color .2s;}
+.contact-list a:hover{color:var(--accent);}
+.foot-meta{display:flex; justify-content:space-between; color:var(--text-faint); font-family:'IBM Plex Mono', monospace; font-size:11.5px; flex-wrap:wrap; gap:8px;}
+
+/* reveal on scroll */
+.reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-id"><b>J.PENNONT</b> // DATA SCIENTIST</div>
+    <div class="nav-links">
+      <a href="#experience">Expériences</a>
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+    </div>
+    <a class="nav-cta" href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Disponible — Poissy, France</div>
+      <h1>Jeremy<br>Pennont</h1>
+      <div class="role">Data Scientist — Ingénieur Mathématiques Appliquées</div>
+      <p class="lede">Formé à la modélisation statistique et au machine learning, je viens du monde de la navigation inertielle et du radar. Je transforme des signaux et des jeux de données complexes en outils et décisions lisibles.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projets">Voir les projets ↓</a>
+        <a class="btn btn-ghost" href="#competences">Voir mes compétences</a>
+        <a class="btn btn-ghost" href="#" data-placeholder="cv">Télécharger le CV</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>Expériences</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="exp-row reveal">
+      <div class="exp-date mono">MARS 2023<br>— ACTUEL</div>
+      <div>
+        <div class="exp-role">Ingénieur Support Technique — Navigation &amp; Capteurs Inertiels</div>
+        <div class="exp-org">ArianeGroup (pour ALTEN), Les Mureaux</div>
+        <p class="exp-desc">Développement d'outils MATLAB d'analyse et d'optimisation des performances inertielles de capteurs embarqués, création d'IHM et de scripts d'automatisation, exploitation de données de campagnes d'essais.</p>
+      </div>
+    </div>
+
+    <div class="exp-row reveal">
+      <div class="exp-date mono">MARS —<br>AOÛT 2022</div>
+      <div>
+        <div class="exp-role">Data Scientist — Classification de données Radar</div>
+        <div class="exp-org">Thales, Limours</div>
+        <p class="exp-desc">Modèles de classification d'objets et d'éoliennes à partir de données radar, outil de conversion vers l'environnement Python, sélection et validation d'attributs avec des experts métier.</p>
+      </div>
+    </div>
+
+    <div class="exp-row reveal">
+      <div class="exp-date mono">OCT 2020<br>— JAN 2021</div>
+      <div>
+        <div class="exp-role">Data Analyst — Analyse industrielle</div>
+        <div class="exp-org">ROXLOR, La Ciotat</div>
+        <p class="exp-desc">Analyse de grandes bases de données (valeurs manquantes, sélection d'attributs), étude des paramètres de production, identification de leviers d'amélioration de la qualité produit.</p>
+      </div>
+    </div>
+
+    <div class="exp-row reveal">
+      <div class="exp-date mono">2019 —<br>2022</div>
+      <div>
+        <div class="exp-role">Diplôme d'ingénieur, Mathématiques Appliquées et Modélisation</div>
+        <div class="exp-org">Polytech Lyon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>Projets Data</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="projects">
+      <div class="card reveal">
+        <div class="card-top">
+          <span class="card-icon">🏎️</span>
+          <span class="card-status">EDA · DATA VIZ</span>
+        </div>
+        <h3>Stratégie &amp; Usure Pneus F1</h3>
+        <div>
+          <div class="ctx-label">Contexte</div>
+          <p>Croiser une passion pour la course automobile avec l'analyse de données : l'usure des pneus dépend de variables chaotiques (température, style de pilotage, trafic), ce qui en fait un terrain d'étude riche pour l'analyse exploratoire.</p>
+        </div>
+        <div>
+          <div class="ctx-label">Réalisation</div>
+          <p>Exploration d'une douzaine de jeux de données F1 (temps au tour, arrêts aux stands, résultats, classements), fusionnés sous Pandas via des jointures sur pilote et circuit. Visualisations avancées mettant en évidence les stratégies de relais (stints) et la dégradation des gommes course par course.</p>
+        </div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Data Viz</span>
+          <span class="tag">EDA</span>
+        </div>
+        <a class="card-link" href="#" data-placeholder="repo-f1">↗ Voir le projet sur GitHub</a>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-top">
+          <span class="card-icon">⚽</span>
+          <span class="card-status">PIPELINE · ML</span>
+        </div>
+        <h3>Pipeline Prédiction Football</h3>
+        <div>
+          <div class="ctx-label">Contexte</div>
+          <p>Construire une pipeline de bout en bout pour modéliser des résultats sportifs, de la collecte des données jusqu'au modèle final, en s'inspirant des méthodes utilisées par les bookmakers.</p>
+        </div>
+        <div>
+          <div class="ctx-label">Réalisation</div>
+          <p>Nettoyage des données, gestion des valeurs aberrantes et feature engineering à partir de plusieurs APIs sportives. Modélisation probabiliste des scores (Poisson / Dixon-Coles) combinée à des systèmes de rating (Elo, Glicko) et à la mécanique d'overround. Analyse transparente de la volatilité du football et des limites des modèles face aux événements imprévisibles.</p>
+        </div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Feature Eng.</span>
+          <span class="tag">Modèles proba.</span>
+        </div>
+        <a class="card-link" href="#" data-placeholder="repo-foot">↗ Voir le projet sur GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>Compétences</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="skill-groups">
+      <div class="skill-group reveal">
+        <h4>Langages &amp; Outils</h4>
+        <div class="skill-list">
+          <div class="skill-item">Python</div>
+          <div class="skill-item">MATLAB</div>
+          <div class="skill-item">Windows / Linux</div>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Data &amp; ML</h4>
+        <div class="skill-list">
+          <div class="skill-item">Data Visualisation</div>
+          <div class="skill-item">Data Science</div>
+          <div class="skill-item">Machine Learning</div>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Savoir-être</h4>
+        <div class="skill-list">
+          <div class="skill-item">Autonomie</div>
+          <div class="skill-item">Sens des responsabilités</div>
+          <div class="skill-item">Force de proposition</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <h2>Discutons de votre prochain projet data.</h2>
+      <div class="contact-list">
+        <a href="mailto:j.pennont9@gmail.com">j.pennont9@gmail.com</a>
+        <a href="tel:+33649494045">+33 6 49 49 40 45</a>
+        <a href="#" data-placeholder="linkedin">LinkedIn ↗</a>
+        <a href="#" data-placeholder="github">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="foot-meta">
+      <span>Poissy, France</span>
+      <span>FR · EN (B2)</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  items.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
